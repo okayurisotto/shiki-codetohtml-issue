@@ -1,0 +1,16 @@
+diff --git a/packages/core/src/constructors/bundle-factory.ts b/packages/core/src/constructors/bundle-factory.ts
+index cbcaa0c6..0aaf3c4d 100644
+--- a/packages/core/src/constructors/bundle-factory.ts
++++ b/packages/core/src/constructors/bundle-factory.ts
+@@ -184,8 +184,10 @@ export function makeSingletonHighlighter<L extends string, T extends string>(
+       _shiki = createHighlighter({
+         ...options,
+         themes: options.themes || [],
+-        langs: options.langs || [],
++        langs: [],
+       })
++      const s = await _shiki
++      await s.loadLanguage(...(options.langs as L[] || []))
+       return _shiki
+     }
+     else {
